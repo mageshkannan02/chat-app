@@ -1,11 +1,11 @@
-const cloudinary = require("../lib/cloudinary");
-const  generateToken  = require("../lib/utils");
-const User = require("../models/user.model");
-const bcrypt = require("bcryptjs");
+import cloudinary from "../lib/cloudinary.js";
+import {generateToken} from "../lib/utils.js";
+import {User} from "../models/user.model.js";
+import bcrypt from "bcryptjs";
 
  
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
- const signup= async(req, res) => {
+export const signup= async(req, res) => {
   
   
 
@@ -53,7 +53,7 @@ const bcrypt = require("bcryptjs");
     }
  }
  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
- const login= async(req, res) => {
+ export const login= async(req, res) => {
     try {
        const {email,password}=req.body;
        const user= await User.findOne({email})
@@ -85,7 +85,7 @@ const bcrypt = require("bcryptjs");
     }
  }
  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
- const logout=(req, res) => {
+ export const logout=(req, res) => {
      try {
       res.cookie("jwt","",{maxAge:0})
       res.status(200).json({message:"Logged out successfully"})
@@ -101,7 +101,7 @@ const bcrypt = require("bcryptjs");
 
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
- const updateProfile=async(req,res)=>{
+export const updateProfile=async(req,res)=>{
      try {
       const {profilePic}=req.body;
      const userId= req.user._id
@@ -123,7 +123,7 @@ const bcrypt = require("bcryptjs");
 }
 
  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
- const checkAuth=(req,res)=>{
+export const checkAuth=(req,res)=>{
      try {
       res.status(200).json(req.user)
 
@@ -132,6 +132,4 @@ const bcrypt = require("bcryptjs");
       res.status(500).json({message:"Internal server Error"})
      }
 }
-module.exports={
-  signup,login,logout,updateProfile,checkAuth
-}
+

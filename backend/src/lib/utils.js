@@ -1,7 +1,8 @@
-const jwt =require("jsonwebtoken")
-require("dotenv").config()
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
- const generateToken=(userId,res)=>{
+ export const generateToken=(userId,res)=>{
     if(!process.env.JWT_SECRET){
         throw new Error("jwt secret is not defined")
     }
@@ -17,4 +18,3 @@ require("dotenv").config()
     return token;
 
 }
-module.exports =generateToken;
